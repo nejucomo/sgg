@@ -7,7 +7,7 @@ window.addEventListener(
     var halfsize = viewsize / 2;
 
     var radius_distribution = function (u) {
-      var a = Math.pow(Math.sin(0.5 * Math.PI * u), 0.25);
+      var a = Math.pow(Math.sin(0.5 * Math.PI * u), 0.35);
       var b = u * u;
 
       return (a + b*b) / 2;
@@ -16,7 +16,7 @@ window.addEventListener(
     var angle_distribution = function (u) {
       var factor = 3 * Math.PI;
       var a = Math.sin(factor * u);
-      var b = Math.pow(Math.abs(a), 1.1);
+      var b = Math.pow(Math.abs(a), 1.5);
       return u - b / factor;
     };
 
