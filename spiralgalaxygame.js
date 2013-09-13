@@ -13,9 +13,9 @@ window.addEventListener(
 
     var param = {
       tightness: 0.35,
-      spokes: 3,
-      spin: 2,
-      diffusion: 1.5,
+      spokes: 4,
+      spin: 3.8,
+      diffusion: 13.5,
     };
 
     var radius_distribution = function (u) {
