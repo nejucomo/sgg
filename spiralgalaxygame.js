@@ -6,15 +6,8 @@ window.addEventListener(
     var viewsize = 1000;
     var halfsize = viewsize / 2;
 
-    var sqrtn = function (x, n) {
-      for (var k = 0; k < n; k++) {
-        x = Math.sqrt(x);
-      }
-      return x;
-    };
-
     var radius_distribution = function (u) {
-      var a = sqrtn(Math.sin(0.5 * Math.PI * u), 2);
+      var a = Math.pow(Math.sin(0.5 * Math.PI * u), 0.25);
       var b = u * u;
 
       return (a + b*b) / 2;
