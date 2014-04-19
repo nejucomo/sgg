@@ -15,6 +15,8 @@ setup(name='spiralgalaxygame',
       packages=find_packages(),
       install_requires=[
         'twisted >= 13.1',
+        'txpostgres >= 1.2.0',
+        'psycopg2 >= 2.5.2',
         ],
       entry_points = {
         'console_scripts': [
