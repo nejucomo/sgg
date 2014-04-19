@@ -1,5 +1,7 @@
 #! /usr/bin/env python
 
+import os
+import glob
 from setuptools import setup, find_packages
 
 
@@ -16,7 +18,12 @@ setup(name='spiralgalaxygame',
         ],
       entry_points = {
         'console_scripts': [
-            'sgg-httpd = sgg.app.httpd:main',
+            'sgg-%s = sgg.app.%s:main' % (n, n)
+            for n in [
+                os.path.basename(n)[:-3]
+                for n in glob.glob('sgg/app/*.py')
+                if not n.endswith('__init__.py')
+                ]
             ],
         },
       package_data = {'sgg': ['web/static/*']},
