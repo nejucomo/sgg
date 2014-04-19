@@ -16,7 +16,7 @@ setup(name='spiralgalaxygame',
         ],
       entry_points = {
         'console_scripts': [
-            'sgg = sgg.main:main',
+            'sgg-httpd = sgg.app.httpd:main',
             ],
         },
       package_data = {'sgg': ['web/static/*']},

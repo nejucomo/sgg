@@ -14,8 +14,8 @@ from twisted import python
 
 
 DESCRIPTION = """
-sgg - The Spiral Galaxy Game!
-"""
+%s - The Spiral Galaxy Game!
+""" % (sys.argv[0],)
 
 
 def main(args = sys.argv[1:]):
