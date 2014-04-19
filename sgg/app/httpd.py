@@ -1,8 +1,6 @@
 #! /usr/bin/env python
 
 import sys
-import argparse
-import logging
 
 import pkg_resources
 
@@ -10,7 +8,8 @@ from twisted.web import server
 from twisted.web.static import File
 from twisted.internet import endpoints
 from twisted import internet
-from twisted import python
+
+from sgg.clopts import ArgumentParser
 
 
 DESCRIPTION = """
@@ -31,29 +30,8 @@ def main(args = sys.argv[1:]):
 
 
 def parse_args(args):
-    p = argparse.ArgumentParser(
-        description=DESCRIPTION,
-        formatter_class=argparse.RawTextHelpFormatter)
-
-    p.add_argument('--log-level',
-                   dest='loglevel',
-                   default='INFO',
-                   choices=['DEBUG', 'INFO', 'WARN', 'ERROR', 'CRITICAL'],
-                   help='Set logging level.')
-
-    opts = p.parse_args(args)
-
-    logging.basicConfig(
-        stream=sys.stdout,
-        format='%(asctime)s %(levelname) 5s %(name)s | %(message)s',
-        datefmt='%Y-%m-%dT%H:%M:%S%z',
-        level=getattr(logging, opts.loglevel))
-
-    python.log.PythonLoggingObserver().start()
-
-    logging.getLogger('parse_args').debug('Options parsed: %r', opts)
-
-    return opts
+    p = ArgumentParser(DESCRIPTION)
+    return p.parse_args(args)
 
 
 if __name__ == '__main__':
