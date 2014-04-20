@@ -13,8 +13,8 @@ from sgg.clopts import ArgumentParser
 
 
 DESCRIPTION = """
-%s - The Spiral Galaxy Game!
-""" % (sys.argv[0],)
+The Spiral Galaxy Game web server.
+"""
 
 
 def main(args = sys.argv[1:]):

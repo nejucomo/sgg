@@ -10,8 +10,12 @@ from sgg.log import bind_log
 
 
 DESCRIPTION = """
-%s - Create the db table schema.
-""" % (sys.argv[0],)
+Create the db table schema.
+
+For important deployment details, please run:
+
+$ sgg-create-db-user --help
+"""
 
 
 @bind_log

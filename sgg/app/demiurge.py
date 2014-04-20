@@ -11,10 +11,8 @@ from sgg.clopts import ArgumentParser
 
 
 DESCRIPTION = """
-%s - The Spiral Galaxy Game Demiurge.
-
-Creator (and Tinkerer) of Universes!
-""" % (sys.argv[0],)
+The Spiral Galaxy Game Demiurge - Creator (and Tinkerer) of Universes!
+"""
 
 
 def main(args = sys.argv[1:]):
