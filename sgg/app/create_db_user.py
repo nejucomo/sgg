@@ -12,7 +12,23 @@ from sgg.log import bind_log
 DESCRIPTION = """
 %s - Create the db user and database.
 
-Configure postgresql database.
+This command needs to be run in the role of a PostgreSQL administrator
+(which can add users and databases) prior to all other database
+interaction.
+
+On Debian the typical process (for a *dev environment*) looks like:
+$ sudo apt-get install postgresql
+$ sudo -u postgres sgg-create-db-user
+$ sgg-create-db-tables
+$ sgg-cron &
+$ sgg-httpd &
+
+Notice that sgg-create-db-tables does not need a special user, since
+password authentication is enabled for the sgg user.
+
+A non-dev environment, such as a production environment, will look
+the same, except non-defaults for --dbname, --dbuser, and --dbpw are
+recommended.
 """ % (sys.argv[0],)
 
 
