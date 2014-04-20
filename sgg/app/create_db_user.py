@@ -32,6 +32,20 @@ the same, except non-defaults for --dbname, --dbuser, and --dbpw are
 recommended.
 """
 
+PostscriptTemplate = """
+Note: To access the %(dbname)r database on a standard debian postgresql
+configuration, you must create an os user named %(dbuser)r or allow
+password-based authentication by modifying pg_hba.conf to contain
+this line:
+
+local %(dbname)s %(dbuser)s password
+
+Also, this line must come before any other line which would match the
+local db/user access.
+
+This must be done prior to running sgg-create-db-tables.
+"""
+
 
 @bind_log
 def main(log, args = sys.argv[1:]):
@@ -46,10 +60,14 @@ def main(log, args = sys.argv[1:]):
     d = conn.connect(dbname='postgres')
 
     then(d, log.info, 'Creating user %r with password <redacted>.', opts.dbuser)
-    then(d, conn.runOperation, 'CREATE USER %s WITH PASSWORD %s', [AsIs(opts.dbuser), opts.dbpw])
+    then(d, conn.runOperation, 'CREATE USER %s WITH UNENCRYPTED PASSWORD %s', [AsIs(opts.dbuser), opts.dbpw])
     then(d, log.info, 'Creating databse %r owned by %r.', opts.dbname, opts.dbuser)
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
+
+    @d.addCallback
+    def show_postscript(_):
+        print PostscriptTemplate % vars(opts)
 
     d.addErrback(lambda v: log.error('%s', v))
     d.addBoth(lambda _: reactor.stop())
