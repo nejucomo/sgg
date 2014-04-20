@@ -28,5 +28,10 @@ setup(name='spiralgalaxygame',
                 ]
             ],
         },
-      package_data = {'sgg': ['web/static/*']},
+      package_data = {
+        'sgg': [
+            'web/static/*',
+            'sql/*',
+            ]
+        },
       )
