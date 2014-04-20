@@ -10,7 +10,7 @@ from sgg.log import bind_log
 
 
 DESCRIPTION = """
-%s - The Spiral Galaxy Game dbadmin
+%s - Create the db user and database.
 
 Configure postgresql database.
 """ % (sys.argv[0],)
