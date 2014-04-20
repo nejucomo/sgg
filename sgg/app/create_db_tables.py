@@ -5,7 +5,7 @@ import sys
 import pkg_resources
 from twisted.internet import reactor
 from txpostgres import txpostgres
-from sgg.clopts import ArgumentParser
+from sgg.clopts import DBArgumentParser
 from sgg.log import bind_log
 
 
@@ -20,7 +20,7 @@ $ sgg-create-db-user --help
 
 @bind_log
 def main(log, args = sys.argv[1:]):
-    opts = parse_args(args)
+    opts = DBArgumentParser.parse_args_simple(DESCRIPTION, args)
 
     sqltransaction = pkg_resources.resource_string('sgg', 'sql/schema.sql')
     log.debug('Loaded SQL schema:\n%s', sqltransaction)
@@ -41,24 +41,6 @@ def main(log, args = sys.argv[1:]):
     d.addBoth(lambda _: reactor.stop())
 
     reactor.run()
-
-
-def parse_args(args):
-    p = ArgumentParser(DESCRIPTION)
-
-    p.add_argument('--dbname',
-                   default='sgg_dev',
-                   help='database name')
-
-    p.add_argument('--dbuser',
-                   default='sgg_dev',
-                   help='database user')
-
-    p.add_argument('--dbpw',
-                   default='sgg_dev',
-                   help='database password')
-
-    return p.parse_args(args)
 
 
 if __name__ == '__main__':

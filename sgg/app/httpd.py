@@ -9,7 +9,7 @@ from twisted.web.static import File
 from twisted.internet import endpoints
 from twisted import internet
 
-from sgg.clopts import ArgumentParser
+from sgg.clopts import LogArgumentParser
 
 
 DESCRIPTION = """
@@ -18,7 +18,7 @@ The Spiral Galaxy Game web server.
 
 
 def main(args = sys.argv[1:]):
-    parse_args(args)
+    LogArgumentParser.parse_args_simple(DESCRIPTION, args)
 
     staticdir = pkg_resources.resource_filename('sgg', 'web/static')
     site = server.Site(File(staticdir))
@@ -28,10 +28,6 @@ def main(args = sys.argv[1:]):
 
     internet.reactor.run()
 
-
-def parse_args(args):
-    p = ArgumentParser(DESCRIPTION)
-    return p.parse_args(args)
 
 
 if __name__ == '__main__':

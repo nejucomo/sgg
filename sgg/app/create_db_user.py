@@ -5,7 +5,7 @@ import sys
 from twisted.internet import reactor
 from txpostgres import txpostgres
 from psycopg2.extensions import AsIs
-from sgg.clopts import ArgumentParser
+from sgg.clopts import DBArgumentParser
 from sgg.log import bind_log
 
 
@@ -49,7 +49,7 @@ This must be done prior to running sgg-create-db-tables.
 
 @bind_log
 def main(log, args = sys.argv[1:]):
-    opts = parse_args(args)
+    opts = DBArgumentParser.parse_args_simple(DESCRIPTION, args)
 
     conn = txpostgres.Connection()
 
@@ -73,24 +73,6 @@ def main(log, args = sys.argv[1:]):
     d.addBoth(lambda _: reactor.stop())
 
     reactor.run()
-
-
-def parse_args(args):
-    p = ArgumentParser(DESCRIPTION)
-
-    p.add_argument('--dbname',
-                   default='sgg_dev',
-                   help='database name')
-
-    p.add_argument('--dbuser',
-                   default='sgg_dev',
-                   help='database user')
-
-    p.add_argument('--dbpw',
-                   default='sgg_dev',
-                   help='database password')
-
-    return p.parse_args(args)
 
 
 if __name__ == '__main__':
