@@ -4,7 +4,7 @@ import logging
 
 
 def bind_log(f):
-    log = logging.getLogger(f.name)
+    log = logging.getLogger(f.func_name)
     @wraps(f)
     def g(*a, **kw):
         return f(log, *a, **kw)

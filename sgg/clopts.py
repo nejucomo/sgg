@@ -2,7 +2,7 @@ import sys
 import argparse
 import logging
 
-from twisted import python
+from twisted.python import log as txpylog
 
 
 class ArgumentParser (argparse.ArgumentParser):
@@ -29,7 +29,7 @@ class ArgumentParser (argparse.ArgumentParser):
             datefmt='%Y-%m-%dT%H:%M:%S%z',
             level=getattr(logging, opts.loglevel))
 
-        python.log.PythonLoggingObserver().start()
+        txpylog.PythonLoggingObserver().start()
 
         logging.getLogger('parse_args').debug('Options parsed: %r', opts)
 
