@@ -7,14 +7,15 @@ from twisted.internet import reactor
 from txpostgres import txpostgres
 from sgg.clopts import DBArgumentParser
 from sgg.log import bind_log
+from sgg.async import then
 
 
 DESCRIPTION = """
 Create the db table schema.
 
-For important deployment details, please run:
+The database user must already be initialized; for details run:
 
-$ sgg-create-db-user --help
+$ sgg-db-admin-init --help
 """
 
 
@@ -27,9 +28,6 @@ def main(log, args = sys.argv[1:]):
 
     conn = txpostgres.Connection()
 
-    def then(d, f, *args, **kw):
-        return d.addCallback(lambda _: f(*args, **kw))
-
     log.info('Connecting to database.')
     d = conn.connect(dbname=opts.dbname, user=opts.dbuser, password=opts.dbpw)
 
@@ -38,9 +36,10 @@ def main(log, args = sys.argv[1:]):
     then(d, log.info, 'Finished.')
 
     d.addErrback(lambda v: log.error('%s', v))
-    d.addBoth(lambda _: reactor.stop())
+    then(d, reactor.stop)
 
     reactor.run()
+
 
 
 if __name__ == '__main__':
