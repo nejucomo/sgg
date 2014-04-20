@@ -19,17 +19,24 @@ interaction.
 On Debian the typical process (for a *dev environment*) looks like:
 
 $ sudo apt-get install postgresql
-$ sudo -u postgres sgg-create-db-user
-$ sgg-create-db-tables
-$ sgg-cron &
-$ sgg-httpd &
+$ sudo -u postgres sgg-db-admin-init
 
-Notice that sgg-create-db-tables does not need a special user, since
-password authentication is enabled for the sgg user.
+At this point you need to follow the instructions output by
+sgg-db-admin-init to enable password authentication for other sgg
+database commands.  (It's also possible to use "peer" authentication
+if you make an operating system user with the same name as the --dbname
+option, which defaults to "sgg_dev".)
+
+Once that is complete, you can run the remaining tools as your normal user
+(or the new sgg-specific user):
+
+$ sgg-db-init # This only needs to be run once.
+$ sgg-db-create-galaxy # Run this each time you want to create a galaxy.
+$ sgg-httpd
 
 A non-dev environment, such as a production environment, will look
-the same, except non-defaults for --dbname, --dbuser, and --dbpw are
-recommended.
+the same, except we recommend you use non-defaults for --dbname, --dbuser,
+and --dbpw options.
 """
 
 PostscriptTemplate = """
