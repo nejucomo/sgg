@@ -1,13 +1,8 @@
 #! /usr/bin/env python
 
-import sys
-
-from twisted.internet import reactor
 from twisted.python.util import println
-from txpostgres import txpostgres
 from psycopg2.extensions import AsIs
-from sgg.clopts import DBArgumentParser
-from sgg.log import bind_log
+from sgg.sql.app import simple_sql_app
 from sgg.async import then
 
 
@@ -56,26 +51,14 @@ This must be done prior to running sgg-create-db-tables.
 """
 
 
-@bind_log
-def main(log, args = sys.argv[1:]):
-    opts = DBArgumentParser.parse_args_simple(DESCRIPTION, args)
-
-    conn = txpostgres.Connection()
-
-    log.info('Connecting to database.')
-    d = conn.connect(dbname='postgres')
-
+@simple_sql_app(DESCRIPTION)
+def main(log, opts, conn, d):
     then(d, log.info, 'Creating user %r with password <redacted>.', opts.dbuser)
     then(d, conn.runOperation, 'CREATE USER %s WITH UNENCRYPTED PASSWORD %s', [AsIs(opts.dbuser), opts.dbpw])
     then(d, log.info, 'Creating databse %r owned by %r.', opts.dbname, opts.dbuser)
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
     then(d, println, PostscriptTemplate % vars(opts))
-
-    d.addErrback(lambda v: log.error('%s', v))
-    then(d, reactor.stop)
-
-    reactor.run()
 
 
 if __name__ == '__main__':
