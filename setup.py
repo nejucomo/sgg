@@ -20,7 +20,7 @@ setup(name='spiralgalaxygame',
         ],
       entry_points = {
         'console_scripts': [
-            'sgg-%s = sgg.app.%s:main' % (n, n)
+            'sgg-%s = sgg.app.%s:main' % (n.replace('_', '-'), n)
             for n in [
                 os.path.basename(n)[:-3]
                 for n in glob.glob('sgg/app/*.py')
