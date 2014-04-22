@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 import sys
 
 import pkg_resources
@@ -27,8 +25,3 @@ def main(args = sys.argv[1:]):
     ep.listen(site)
 
     internet.reactor.run()
-
-
-
-if __name__ == '__main__':
-    main()

@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 from twisted.python.util import println
 from psycopg2.extensions import AsIs
 from sgg.sql.app import simple_sql_app
@@ -59,7 +57,3 @@ def main(log, opts, conn, d):
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
     then(d, println, PostscriptTemplate % vars(opts))
-
-
-if __name__ == '__main__':
-    main()

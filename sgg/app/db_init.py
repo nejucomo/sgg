@@ -1,5 +1,3 @@
-#! /usr/bin/env python
-
 import pkg_resources
 from sgg.async import then
 from sgg.sql.app import simple_sql_app
@@ -22,8 +20,3 @@ def main(log, opts, conn, d):
     then(d, log.info, 'Creating tables.')
     then(d, conn.runOperation, sqltransaction)
     then(d, log.info, 'Finished.')
-
-
-
-if __name__ == '__main__':
-    main()
