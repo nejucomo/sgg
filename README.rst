@@ -18,10 +18,8 @@ This assumes a debian-like system::
 
     $ git checkout https://github.com/nejucomo/sgg
     $ cd ./sgg
-    $ T="$HOME/virtualenvs/sgg-dev"
-    $ mkdir -p "$T"
-    $ virtualenv "$T"
-    $ source "$T/bin/activate"
+    $ virtualenv ./venv
+    $ source ./venv/bin/activate
     $ ./setup.py develop
     $ sudo apt-get install postgresql{,-doc,-client}
     $ sudo -u postgres $(which sgg-db-admin-init)
