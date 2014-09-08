@@ -5,9 +5,6 @@ from sgg.log import bind_log
 
 @bind_log
 def connect(log, dbname, dbuser, dbpw):
+    log.info('Connecting to database %r as %r.', dbname, dbuser)
     conn = txpostgres.Connection()
-
-    log.info('Connecting to database.')
-    d = conn.connect(dbname=dbname, user=dbuser, password=dbpw)
-
-    return (conn, d)
+    return conn.connect(dbname=dbname, user=dbuser, password=dbpw)

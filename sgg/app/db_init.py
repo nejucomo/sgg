@@ -13,10 +13,10 @@ $ sgg-db-admin-init --help
 
 
 @simple_sql_app(DESCRIPTION)
-def main(log, opts, conn, d):
+def main(conn, log, opts):
     sqltransaction = pkg_resources.resource_string('sgg', 'sql/schema.sql')
     log.debug('Loaded SQL schema:\n%s', sqltransaction)
 
-    then(d, log.info, 'Creating tables.')
-    then(d, conn.runOperation, sqltransaction)
+    log.info('Creating tables.')
+    d = conn.runOperation(sqltransaction)
     then(d, log.info, 'Finished.')

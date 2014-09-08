@@ -7,7 +7,7 @@ from sgg.async import then
 from sgg import sql
 
 
-def simple_sql_app(description):
+def simple_sql_app(description, dbadmin=False):
     """A decorator for apps which simply make an SQL connection, use it, then exit."""
     def main_decorator(submain):
 
@@ -16,10 +16,13 @@ def simple_sql_app(description):
         def main(log, args = sys.argv[1:]):
             opts = DBArgumentParser.parse_args_simple(description, args)
 
-            (conn, d) = sql.connect(opts.dbname, opts.dbuser, opts.dbpw)
+            if dbadmin:
+                (dbname, dbuser, dbpw) = ('postgres', None, None)
+            else:
+                (dbname, dbuser, dbpw) = (opts.dbname, opts.dbuser, opts.dbpw)
 
-            submain(log, opts, conn, d)
-
+            d = sql.connect(dbname, dbuser, dbpw)
+            d.addCallback(submain, log, opts)
             d.addErrback(lambda v: log.error('%s', v))
             then(d, reactor.stop)
 

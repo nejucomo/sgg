@@ -49,10 +49,10 @@ This must be done prior to running sgg-create-db-tables.
 """
 
 
-@simple_sql_app(DESCRIPTION)
-def main(log, opts, conn, d):
-    then(d, log.info, 'Creating user %r with password <redacted>.', opts.dbuser)
-    then(d, conn.runOperation, 'CREATE USER %s WITH UNENCRYPTED PASSWORD %s', [AsIs(opts.dbuser), opts.dbpw])
+@simple_sql_app(DESCRIPTION, dbadmin=True)
+def main(conn, log, opts):
+    log.info('Creating user %r with password <redacted>.', opts.dbuser)
+    d = conn.runOperation('CREATE USER %s WITH UNENCRYPTED PASSWORD %s', [AsIs(opts.dbuser), opts.dbpw])
     then(d, log.info, 'Creating databse %r owned by %r.', opts.dbname, opts.dbuser)
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
