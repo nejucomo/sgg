@@ -4,7 +4,8 @@ import os, sys, glob, subprocess
 from setuptools import setup, find_packages, Command
 
 
-PYPACKAGE = 'spiralgalaxygame'
+PACKAGENAME = 'spiralgalaxygame'
+BASEMODNAME = 'sgg'
 INSTALL_REQUIRES = [
     'twisted >= 14.0',
     'txpostgres >= 1.2.0',
@@ -15,9 +16,9 @@ INSTALL_REQUIRES = [
 
 def main(args = sys.argv[1:]):
     setup(
-        name=PYPACKAGE,
+        name=PACKAGENAME,
         description='Spiral Galaxy Game',
-        url='https://github.com/nejucomo/{0}'.format(PYPACKAGE),
+        url='https://github.com/nejucomo/{0}'.format(PACKAGENAME),
         license='GPLv3',
         version='0.1.dev0',
         author='Nathan Wilcox',
@@ -62,7 +63,7 @@ class VirtualEnvCommandBase (Command):
         join = os.path.join
 
         self.basedir = os.path.dirname(os.path.abspath(__file__))
-        self.pypkg = join(self.basedir, PYPACKAGE)
+        self.pymod = join(self.basedir, BASEMODNAME)
         self.testdir = join(self.basedir, 'build', 'test')
         self.venvdir = join(self.testdir, 'venv')
 
@@ -117,7 +118,7 @@ class TestWithCoverageAndTrialInAVirtualEnvCommand (VirtualEnvCommandBase):
     def run_within_virtualenv(self):
         self._update_python_path()
         try:
-            run(self.coverage, 'run', '--branch', '--source', self.pypkg, self.trial, PYPACKAGE)
+            run(self.coverage, 'run', '--branch', '--source', self.pymod, self.trial, BASEMODNAME)
         finally:
             run(self.coverage, 'html')
 
