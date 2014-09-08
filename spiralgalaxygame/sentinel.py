@@ -1,4 +1,16 @@
+Sentinels = {}
+
+
 class Sentinel (object):
+    def __new__(cls, name):
+        try:
+            return Sentinels[name]
+        except KeyError:
+            s = object.__new__(cls)
+            s.__init__(name)
+            Sentinels[name] = s
+            return s
+
     def __init__(self, name):
         self.name = name
 
