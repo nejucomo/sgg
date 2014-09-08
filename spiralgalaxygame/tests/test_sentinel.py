@@ -22,6 +22,9 @@ class EnumTests (unittest.TestCase):
     def setUp(self):
         self.e = Enum('red', 'green', 'blue')
 
+    def test_repr(self):
+        self.assertEqual(repr(self.e), '<Enum blue, green, red>')
+
     def test_iter_and_members_are_sentinels(self):
         for member in self.e:
             self.assertIsInstance(member, Sentinel)
