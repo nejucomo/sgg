@@ -5,8 +5,18 @@ from sgg.geometry import Vector, Circle
 from sgg.discdist import DiscreteDistribution
 
 
-def generate_galaxy_bodies(spokes = 4, spin = 3.8, diffusion = 13.5, tightness = 0.35):
-    pass
+def generate_galaxy_bodies(randgen = random.random,
+                           parentmu = 1000,
+                           parentsigma = 100,
+                           galacticradius = 1000,
+                           spokes = 4,
+                           spin = 3.8,
+                           diffusion = 13.5,
+                           tightness = 0.35):
+
+    for i in range(int(random.lognormvariate(parentmu, parentsigma))):
+        for body in generate_star(randgen, galacticradius, spokes, spin, diffusion, tightness):
+            yield body
 
 
 # Notes:
