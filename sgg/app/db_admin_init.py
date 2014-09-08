@@ -57,3 +57,5 @@ def main(conn, log, opts):
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
     then(d, println, PostscriptTemplate % vars(opts))
+
+    return d

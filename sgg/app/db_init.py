@@ -20,3 +20,5 @@ def main(conn, log, opts):
     log.info('Creating tables.')
     d = conn.runOperation(sqltransaction)
     then(d, log.info, 'Finished.')
+
+    return d

@@ -22,4 +22,4 @@ def main(conn, log, opts):
 
         return d
 
-    conn.runInteraction(interaction)
+    return conn.runInteraction(interaction)
