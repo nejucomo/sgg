@@ -35,12 +35,12 @@ and --dbpw options.
 """
 
 PostscriptTemplate = """
-Note: To access the %(dbname)r database on a standard debian postgresql
-configuration, you must create an os user named %(dbuser)r or allow
+Note: To access the {dbname!r} database on a standard debian postgresql
+configuration, you must create an os user named {dbuser!r} or allow
 password-based authentication by modifying pg_hba.conf to contain
 this line:
 
-local %(dbname)s %(dbuser)s password
+local {dbname} {dbuser} password
 
 Also, this line must come before any other line which would match the
 local db/user access.
@@ -56,6 +56,6 @@ def main(conn, log, opts):
     then(d, log.info, 'Creating databse %r owned by %r.', opts.dbname, opts.dbuser)
     then(d, conn.runOperation, 'CREATE DATABASE %s OWNER %s', [AsIs(opts.dbname), AsIs(opts.dbuser)])
     then(d, log.info, 'Finished.')
-    then(d, println, PostscriptTemplate % vars(opts))
+    then(d, println, PostscriptTemplate.format(vars(opts)))
 
     return d

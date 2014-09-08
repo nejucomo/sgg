@@ -1,4 +1,5 @@
 from math import sqrt, cos, sin
+from sgg.precondition import PreconditionError
 
 
 class Vector (tuple):
@@ -9,7 +10,7 @@ class Vector (tuple):
 
     def __new__(cls, x, y):
         if not (isinstance(x, float) and isinstance(y, float)):
-            raise TypeError('%s(%r, %r)' % (cls.__name__, x, y))
+            raise PreconditionError(cls, x, y)
 
         return super(Vector, cls).__new__(cls, (x, y))
 
@@ -26,14 +27,14 @@ class Vector (tuple):
         return sqrt(self.x ** 2 + self.y ** 2)
 
     def __repr__(self):
-        return '<%r, %r>' % self
+        return '<{x!r}, {y!r}>'.format(**self)
 
     def __neg__(self):
         return Vector(-self.x, -self.y)
 
     def __add__(self, other):
         if not isinstance(other, Vector):
-            raise TypeError('%r + %r' % (self, other))
+            raise TypeError('{!r} + {!r}'.format(self, other))
         return Vector(self.x + other.x, self.y + other.y)
 
     def __sub__(self, other):
@@ -41,14 +42,14 @@ class Vector (tuple):
 
     def __mul__(self, other):
         if not isinstance(other, float):
-            raise TypeError('%r * %r' % (self, other))
+            raise TypeError('{!r} * {!r}'.format(self, other))
         return self + (- other)
 
 
 class Circle (tuple):
     def __new__(cls, center, radius):
         if not (isinstance(center, Vector) and isinstance(radius, float)):
-            raise TypeError('%s(%r, %r)' % (cls.__name__, center, radius))
+            raise PreconditionError(cls, center, radius)
 
         return super(Circle, cls).__new__(cls, (center, radius))
 
@@ -62,6 +63,8 @@ class Circle (tuple):
 
     def overlaps(self, other):
         if not isinstance(other, Circle):
-            raise TypeError('%r.overlaps(%r)' % (self, other))
+            raise TypeError('{!r}.overlaps({!r})'.format(self, other))
 
         return (self.center - other.center).magnitude <= (self.radius + other.radius)
+
+

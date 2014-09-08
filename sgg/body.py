@@ -1,3 +1,4 @@
+from sgg.precondition import PreconditionError
 from sgg.geometry import Circle
 from sgg.sentinel import Enum
 
@@ -19,7 +20,7 @@ BodyKind = Enum(
 class Body (tuple):
     def __new__(cls, kind, circle):
         if not (kind in BodyKind and isinstance(circle, Circle)):
-            raise TypeError('%s(%r, %r)' % (cls.__name__, kind, circle))
+            raise PreconditionError(cls, kind, circle)
 
         super(Body, cls).__new__(cls, (kind, circle))
 

@@ -3,7 +3,7 @@ class Sentinel (object):
         self.name = name
 
     def __repr__(self):
-        return '<%s %s>' % (self.__class__.__name__, self.name)
+        return '<{0.__class__.__name__} {0.name}>'.format(self)
 
 
 class Enum (frozenset):
@@ -17,6 +17,6 @@ class Enum (frozenset):
         return obj
 
     def __repr__(self):
-        return '<%s %s>' % (self.__class__.__name__, ', '.join(sorted( s.name for s in self )))
+        return '<{0.__class__.__name__} {1}>'.format(self, ', '.join(sorted( s.name for s in self )))
 
 

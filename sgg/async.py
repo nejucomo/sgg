@@ -7,7 +7,8 @@ def check_is_then(d, expected, f, *args, **kw):
 
     @wraps(f)
     def check_then_continue(result):
-        assert result is expected, 'Unexpected deferred result: found %r, expected %r' % (result, expected)
+        assert result is expected, \
+            'Unexpected deferred result: found {!r}, expected {!r}'.format(result, expected)
         return f(*args, **kw)
 
     return d.addCallback(check_then_continue)

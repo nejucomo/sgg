@@ -1,3 +1,6 @@
+from sgg.precondition import PreconditionError
+
+
 class DiscreteDistribution (object):
 
     def __init__(self, *weighteditems):
@@ -10,7 +13,7 @@ class DiscreteDistribution (object):
 
     def __call__(self, u):
         if not (isinstance(u, float) and 0 <= u < 1.0):
-            raise TypeError('DiscreteDistribution.__call__(%r)' % (u,))
+            raise PreconditionError(self.__call__, u)
 
         k = u * self._total
 
@@ -19,4 +22,4 @@ class DiscreteDistribution (object):
             if k < 0:
                 return item
 
-        assert False, 'Invariant failed: k %r, u %r, items %r' % (k, u, self._weighteditems)
+        assert False, 'Invariant failed: k {!r}, u {!r}, items {!r}'.format(k, u, self._weighteditems)
