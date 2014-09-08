@@ -5,7 +5,6 @@ from setuptools import setup, find_packages, Command
 
 
 PACKAGENAME = 'spiralgalaxygame'
-BASEMODNAME = 'sgg'
 INSTALL_REQUIRES = [
     'twisted >= 14.0',
     'txpostgres >= 1.2.0',
@@ -28,16 +27,16 @@ def main(args = sys.argv[1:]):
         install_requires=INSTALL_REQUIRES,
         entry_points = {
             'console_scripts': [
-                'sgg-%s = sgg.app.%s:main' % (n.replace('_', '-'), n)
+                '{0}-{1} = {0}.app.{2}:main'.format(PACKAGENAME, n.replace('_', '-'), n)
                 for n in [
                     os.path.basename(n)[:-3]
-                    for n in glob.glob('sgg/app/*.py')
+                    for n in glob.glob('{0}/app/*.py'.format(PACKAGENAME))
                     if not n.endswith('__init__.py')
                     ]
                 ],
             },
         package_data = {
-            'sgg': [
+            PACKAGENAME: [
                 'web/static/*',
                 'sql/*',
                 ]
@@ -63,7 +62,7 @@ class VirtualEnvCommandBase (Command):
         join = os.path.join
 
         self.basedir = os.path.dirname(os.path.abspath(__file__))
-        self.pymod = join(self.basedir, BASEMODNAME)
+        self.pymod = join(self.basedir, PACKAGENAME)
         self.testdir = join(self.basedir, 'build', 'test')
         self.venvdir = join(self.testdir, 'venv')
 
@@ -118,7 +117,7 @@ class TestWithCoverageAndTrialInAVirtualEnvCommand (VirtualEnvCommandBase):
     def run_within_virtualenv(self):
         self._update_python_path()
         try:
-            run(self.coverage, 'run', '--branch', '--source', self.pymod, self.trial, BASEMODNAME)
+            run(self.coverage, 'run', '--branch', '--source', self.pymod, self.trial, PACKAGENAME)
         finally:
             run(self.coverage, 'html')
 
