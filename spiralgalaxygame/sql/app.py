@@ -1,10 +1,10 @@
 import sys
 from functools import wraps
 from twisted.internet import reactor
-from sgg.clopts import DBArgumentParser
-from sgg.log import bind_log
-from sgg.async import then
-from sgg import sql
+from spiralgalaxygame.clopts import DBArgumentParser
+from spiralgalaxygame.log import bind_log
+from spiralgalaxygame.async import then
+from spiralgalaxygame import sql
 
 
 def simple_sql_app(description, dbadmin=False):

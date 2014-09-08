@@ -1,4 +1,4 @@
-from sgg.precondition import PreconditionError
+from spiralgalaxygame.precondition import PreconditionError
 
 
 class DiscreteDistribution (object):

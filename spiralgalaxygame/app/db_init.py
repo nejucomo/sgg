@@ -1,6 +1,6 @@
 import pkg_resources
-from sgg.async import then
-from sgg.sql.app import simple_sql_app
+from spiralgalaxygame.async import then
+from spiralgalaxygame.sql.app import simple_sql_app
 
 
 DESCRIPTION = """

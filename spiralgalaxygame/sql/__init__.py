@@ -1,6 +1,6 @@
 
 from txpostgres import txpostgres
-from sgg.log import bind_log
+from spiralgalaxygame.log import bind_log
 
 
 @bind_log

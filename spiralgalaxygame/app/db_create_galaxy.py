@@ -1,7 +1,7 @@
 from twisted.internet import defer
-from sgg.async import then
-from sgg.sql.app import simple_sql_app
-from sgg.demiurge import generate_galaxy_bodies
+from spiralgalaxygame.async import then
+from spiralgalaxygame.sql.app import simple_sql_app
+from spiralgalaxygame.demiurge import generate_galaxy_bodies
 
 
 DESCRIPTION = """

@@ -1,8 +1,8 @@
 import random
 from math import sin, pi
-from sgg.body import Body, BodyKind
-from sgg.geometry import Vector, Circle
-from sgg.discdist import DiscreteDistribution
+from spiralgalaxygame.body import Body, BodyKind
+from spiralgalaxygame.geometry import Vector, Circle
+from spiralgalaxygame.discdist import DiscreteDistribution
 
 
 def generate_galaxy_bodies(randgen = random.random,

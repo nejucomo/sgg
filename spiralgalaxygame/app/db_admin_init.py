@@ -1,7 +1,7 @@
 from twisted.python.util import println
 from psycopg2.extensions import AsIs
-from sgg.sql.app import simple_sql_app
-from sgg.async import then
+from spiralgalaxygame.sql.app import simple_sql_app
+from spiralgalaxygame.async import then
 
 
 DESCRIPTION = """

@@ -1,5 +1,5 @@
 from math import sqrt, cos, sin
-from sgg.precondition import PreconditionError
+from spiralgalaxygame.precondition import PreconditionError
 
 
 class Vector (tuple):

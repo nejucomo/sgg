@@ -7,7 +7,7 @@ from twisted.web.static import File
 from twisted.internet import endpoints
 from twisted import internet
 
-from sgg.clopts import LogArgumentParser
+from spiralgalaxygame.clopts import LogArgumentParser
 
 
 DESCRIPTION = """

@@ -1,6 +1,6 @@
-from sgg.precondition import PreconditionError
-from sgg.geometry import Circle
-from sgg.sentinel import Enum
+from spiralgalaxygame.precondition import PreconditionError
+from spiralgalaxygame.geometry import Circle
+from spiralgalaxygame.sentinel import Enum
 
 
 BodyKind = Enum(
