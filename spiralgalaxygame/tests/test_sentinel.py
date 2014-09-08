@@ -13,6 +13,10 @@ class SentinelTests (unittest.TestCase):
     def test_repr(self):
         self.assertEqual(repr(self.s), '<Sentinel thingy>')
 
+    def test_identity_by_name(self):
+        s2 = Sentinel('th' + 'ingy') # `+` to avoid string interning.
+        self.assertIs(s2, self.s)
+
 
 class EnumTests (unittest.TestCase):
     def setUp(self):
