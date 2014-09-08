@@ -8,7 +8,7 @@ PACKAGENAME = 'spiralgalaxygame'
 INSTALL_REQUIRES = [
     'twisted >= 14.0',
     'txpostgres >= 1.2.0',
-    #'psycopg2 >= 2.5.2',
+    'psycopg2 >= 2.5.2',
     'mock >= 1.0.1',
     ]
 
@@ -27,7 +27,7 @@ def main(args = sys.argv[1:]):
         install_requires=INSTALL_REQUIRES,
         entry_points = {
             'console_scripts': [
-                '{0}-{1} = {0}.app.{2}:main'.format(PACKAGENAME, n.replace('_', '-'), n)
+                'sgg-{1} = {0}.app.{2}:main'.format(PACKAGENAME, n.replace('_', '-'), n)
                 for n in [
                     os.path.basename(n)[:-3]
                     for n in glob.glob('{0}/app/*.py'.format(PACKAGENAME))
