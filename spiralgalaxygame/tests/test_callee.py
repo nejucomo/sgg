@@ -5,7 +5,8 @@ from spiralgalaxygame import callee
 
 class calleeTests (unittest.TestCase):
     def test_str_of_func(self):
-        def my_func(): pass
+        def my_func():
+            pass
 
         self.assertEqual(callee.name_of(my_func), 'my_func')
 
