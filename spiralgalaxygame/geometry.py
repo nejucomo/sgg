@@ -1,6 +1,8 @@
 from math import atan, cos, pi, sin, sqrt
 from preconditions import preconditions
 
+from spiralgalaxygame.fleq import float_eq
+
 
 class Vector (tuple):
 
@@ -39,6 +41,12 @@ class Vector (tuple):
 
     def __repr__(self):
         return '<{!r}, {!r}>'.format(*self)
+
+    @preconditions(
+        lambda other: isinstance(other, Vector),
+        )
+    def __eq__(self, other):
+        return float_eq(self.x, other.x) and float_eq(self.y, other.y)
 
     def __neg__(self):
         return Vector(-self.x, -self.y)
