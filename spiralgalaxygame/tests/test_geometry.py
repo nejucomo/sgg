@@ -51,3 +51,38 @@ class VectorTests (unittest.TestCase):
         b = Vector.from_angle_and_radius(pi/4, 1)
 
         self.assertEqual(a, b)
+
+    def test_neg(self):
+        a = Vector(0.5 ** 0.5, 0.5 ** 0.5)
+        b = Vector.from_angle_and_radius(1.25*pi, 1)
+
+        self.assertEqual(a, -b)
+
+    def test_add(self):
+        a = Vector(0.5 ** 0.5, 0.5 ** 0.5)
+        b = Vector.from_angle_and_radius(1.25*pi, 1)
+        c = Vector(0.0, 0.0)
+
+        self.assertEqual(c, a + b)
+
+    def test_sub(self):
+        a = Vector(0.5 ** 0.5, 0.5 ** 0.5)
+        b = Vector.from_angle_and_radius(pi/4, 1)
+        c = Vector(0.0, 0.0)
+
+        self.assertEqual(c, a - b)
+
+    def test_mul(self):
+        a = Vector(1.0, 1.0)
+        b = Vector.from_angle_and_radius(pi/4, 1)
+
+        self.assertEqual(a, b * (2**0.5))
+
+    def test_div(self):
+        a = Vector(1.0, 1.0)
+        b = a / a.magnitude
+
+        self.assertEqual(1.0, b.magnitude)
+        self.assertEqual(a.angle, b.angle)
+        self.assertEqual(0.5**0.5, b.x)
+        self.assertEqual(0.5**0.5, b.y)
