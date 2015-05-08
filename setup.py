@@ -6,6 +6,7 @@ from setuptools import setup, find_packages, Command
 
 PACKAGENAME = 'spiralgalaxygame'
 INSTALL_REQUIRES = [
+    'preconditions >= 0.1',
     'twisted >= 14.0',
     'txpostgres >= 1.2.0',
     'psycopg2 >= 2.5.2',
