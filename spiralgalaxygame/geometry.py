@@ -31,7 +31,7 @@ class Vector (tuple):
         elif x > 0:
             return atan(y/x)
         else:
-            return pi + atan(y/x)
+            return (-pi if y < 0 else pi) + atan(y/x)
 
     @property
     def magnitude(self):

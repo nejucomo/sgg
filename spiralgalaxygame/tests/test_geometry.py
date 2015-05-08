@@ -31,12 +31,11 @@ class VectorTests (unittest.TestCase):
 
     def test_radial_properties(self):
         for i in range(8):
-            a = pi * (i-3) / 8
-            r = 42.0
+            a = pi * (i-3) / 4
+            r = 1.0
 
             v = Vector.from_angle_and_radius(a, r)
 
-            vangle = v.angle
-            self.assertAlmostEqual(a, vangle, 7, `locals()`)
-            self.assertAlmostEqual(r, v.magnitude, 7, `locals()`)
+            self.assertAlmostEqual(a, v.angle)
+            self.assertAlmostEqual(r, v.magnitude)
 
