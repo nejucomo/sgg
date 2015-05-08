@@ -1,4 +1,4 @@
-from math import sqrt, cos, sin
+from math import atan, cos, pi, sin, sqrt
 from preconditions import preconditions
 
 
@@ -24,11 +24,21 @@ class Vector (tuple):
         return self[1]
 
     @property
+    def angle(self):
+        (x, y) = self
+        if x == 0:
+            return -pi/2 if y < 0 else pi/2
+        elif x > 0:
+            return atan(y/x)
+        else:
+            return pi + atan(y/x)
+
+    @property
     def magnitude(self):
         return sqrt(self.x ** 2 + self.y ** 2)
 
     def __repr__(self):
-        return '<{x!r}, {y!r}>'.format(**self)
+        return '<{!r}, {!r}>'.format(*self)
 
     def __neg__(self):
         return Vector(-self.x, -self.y)
