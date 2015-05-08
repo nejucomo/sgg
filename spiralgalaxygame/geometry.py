@@ -64,7 +64,10 @@ class Vector (tuple):
         lambda other: isinstance(other, float),
         )
     def __mul__(self, other):
-        return self + (- other)
+        return Vector(self.x * other, self.y * other)
+
+    def __div__(self, other):
+        return self * (1.0 / other)
 
 
 class Circle (tuple):

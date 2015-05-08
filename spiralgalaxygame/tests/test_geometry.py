@@ -82,7 +82,7 @@ class VectorTests (unittest.TestCase):
         a = Vector(1.0, 1.0)
         b = a / a.magnitude
 
-        self.assertEqual(1.0, b.magnitude)
-        self.assertEqual(a.angle, b.angle)
-        self.assertEqual(0.5**0.5, b.x)
-        self.assertEqual(0.5**0.5, b.y)
+        self.assertAlmostEqual(1.0, b.magnitude)
+        self.assertAlmostEqual(a.angle, b.angle)
+        self.assertAlmostEqual(0.5**0.5, b.x)
+        self.assertAlmostEqual(0.5**0.5, b.y)
