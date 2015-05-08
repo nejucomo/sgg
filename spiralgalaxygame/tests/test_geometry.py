@@ -46,3 +46,8 @@ class VectorTests (unittest.TestCase):
     def test_repr(self):
         self.assertEqual('<2.0, 3.0>', repr(Vector(2.0, 3.0)))
 
+    def test_eq(self):
+        a = Vector(0.5 ** 0.5, 0.5 ** 0.5)
+        b = Vector.from_angle_and_radius(pi/4, 1)
+
+        self.assertEqual(a, b)
