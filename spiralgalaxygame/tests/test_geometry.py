@@ -42,3 +42,7 @@ class VectorTests (unittest.TestCase):
     def test_angle_edge_cases(self):
         self.assertAlmostEqual(pi/2, Vector(0.0,1.0).angle)
         self.assertAlmostEqual(-pi/2, Vector(0.0,-1.0).angle)
+
+    def test_repr(self):
+        self.assertEqual('<2.0, 3.0>', repr(Vector(2.0, 3.0)))
+
