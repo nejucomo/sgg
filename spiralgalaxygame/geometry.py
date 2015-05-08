@@ -9,8 +9,8 @@ class Vector (tuple):
         return cls(radius * cos(angle), radius * sin(angle))
 
     @preconditions(
-        lambda x: isinstance(x, float) or isinstance(x, int),
-        lambda y: isinstance(y, float) or isinstance(y, int),
+        lambda x: isinstance(x, float),
+        lambda y: isinstance(y, float),
         )
     def __new__(cls, x, y):
         return super(Vector, cls).__new__(cls, (x, y))
