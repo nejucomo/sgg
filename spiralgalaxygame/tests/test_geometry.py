@@ -1,7 +1,7 @@
 import unittest
 from math import pi
 
-from spiralgalaxygame.geometry import Vector
+from spiralgalaxygame.geometry import Vector, Circle
 
 
 class VectorTests (unittest.TestCase):
@@ -86,3 +86,33 @@ class VectorTests (unittest.TestCase):
         self.assertAlmostEqual(a.angle, b.angle)
         self.assertAlmostEqual(0.5**0.5, b.x)
         self.assertAlmostEqual(0.5**0.5, b.y)
+
+
+class CircleTests (unittest.TestCase):
+    def setUp(self):
+        v = Vector(3.0, 4.0)
+        r = 5.0
+        c = Circle(v, r)
+        self.testdata = (c, v, r)
+
+    def test_tupleness(self):
+        c, v, r = self.testdata
+        self.assertIsInstance(c, tuple)
+        (v1, r1) = c
+
+        self.assertIs(v, v1)
+        self.assertEqual(r, r1)
+        self.assertIs(v, c[0])
+        self.assertEqual(r, c[1])
+
+    def test_properties(self):
+        c, v, r = self.testdata
+
+        self.assertIs(v, c.center)
+        self.assertEqual(r, c.radius)
+
+    def test_overlaps(self):
+        c, _, _ = self.testdata
+
+        self.failUnless(c.overlaps(Circle(Vector(0.0,0.0), 0.0)))
+        self.failIf(c.overlaps(Circle(Vector(-0.1,-0.1), 0.05)))
